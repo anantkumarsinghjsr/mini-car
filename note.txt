@@ -3,9 +3,8 @@ Note: Frontend Angular and backend Core PHP,mysql(I have also provide the PHP fi
 1: Install npm in angular folder for node_module ( /var/www/html/angular/ ng install For Ubuntu) 
 2: Set the (API url path i have also provide the php files and db ) API_ENDPOINT in appSettings.ts file
 3: /var/www/html/angular/ ng serve --open ( For Ubuntu)
-4: login details: anantkumarsinghjsr@gmail.com/123456
-5: If you run this project in ubuntu please also check cross origin issue but i have set from my end in php file (if php file in differ folder)
-6: I have worked in Content section as your requirement.
-7: I have created this project in normal struture bue for time (But we/you can make better this project use rootChild(Lazy loading), Layout structure,Interceptor and many process to do better)
+4: If you run this project in ubuntu please also check cross origin issue but i have set from my end in php file (if php file in differ folder)
+5: I have worked in Content section as your requirement.
+6: I have created this project in normal struture bue for time (But we/you can make better this project use rootChild(Lazy loading), Layout structure,Interceptor and many process to do better)
 This is demo dase.
 Please check i any confusion please inform me i will clarify
