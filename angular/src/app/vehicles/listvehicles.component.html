@@ -48,7 +48,7 @@
 													
 												  </a>
 												</mat-header-cell>												
-											  <mat-cell *matCellDef="let element" [innerHTML]="element.serial_number" ></mat-cell>
+											  <mat-cell *matCellDef="let element" data-toggle="modal" data-target="#myModal" (click)="showDetails(element)" [innerHTML]="element.serial_number" ></mat-cell>
 											</ng-container>
 
 											
