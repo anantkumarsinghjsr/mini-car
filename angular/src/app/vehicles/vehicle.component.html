@@ -1,0 +1,115 @@
+<div class="container body">
+    <div class="main_container">
+        <app-nav></app-nav>
+
+        <div class="right_col" role="main">
+            <div class="">
+                <app-pagetitle></app-pagetitle>				 
+				 <alert></alert>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            
+                                
+                                <form id="" class="form-horizontal form-label-left" #contentForm="ngForm" name='form' (ngSubmit)="contentForm.form.valid && vehicleSubmit()" novalidate >
+									 <div class="col-md-6 col-sm-6">                        
+                                      <div class="form-group">
+                                        <label class="" for="first-name">Vechicle Model<span class="required">*</span>
+                                        </label>                                        
+										<input type="text" id="vechicle_model" name="vechicle_model" required  [(ngModel)]="model.vechicle_model"  #vechicle_model="ngModel"  class="form-control col-md-7 col-xs-12">
+										<div *ngIf="contentForm.submitted && !vechicle_model.valid" class="error-validation">Vechicle modele is required</div>                                        
+                                     </div>
+								     </div>
+									 <div class="col-md-6 col-sm-6">       
+										<div class="form-group">
+											<label class="" for="last-name">Manufacturer<span class="required">*</span> </label>   
+											<select class="form-control" [(ngModel)]="model.manufacturer" required #manufacturer="ngModel" name='manufacturer' id='manufacturer'>
+												   <option value="" >Select Manufacturer</option>
+													<option value="{{manufacturerList.id}}" *ngFor="let manufacturerList of manufacturerLists;"  >{{manufacturerList.name}}</option>
+											</select>
+											<div *ngIf="contentForm.submitted && !manufacturer.valid" class="error-validation">Manufacturer is required</div> 											                                  
+										</div>
+								    </div>
+									 <div class="col-md-6 col-sm-6">                        
+										  <div class="form-group">
+											<label class="" for="name">Name<span class="required">*</span>
+											</label>                                        
+											<input type="text" id="name" name="name" required  [(ngModel)]="model.name"  #name="ngModel"  class="form-control col-md-7 col-xs-12">
+											<div *ngIf="contentForm.submitted && !name.valid" class="error-validation">Vehicle name is required</div>                                        
+										 </div>
+								     </div>
+									<div class="col-md-6 col-sm-6">       
+										<div class="form-group">
+											<label class="" for="last-name">Color<span class="required">*</span> </label>   
+											<select class="form-control" [(ngModel)]="model.color" required #color="ngModel" name='color' id='color'>
+												<option value="" >Select Color</option>
+												<option value="{{colourList.colour}}" *ngFor="let colourList of colourLists;"  >{{colourList.colour}}</option>
+											</select>
+											<div *ngIf="contentForm.submitted && !color.valid" class="error-validation">Color is required</div> 											                                  
+										</div>
+								    </div>
+									<div class="col-md-6 col-sm-6">       
+										<div class="form-group">
+											<label class="" for="last-name">Year<span class="required">*</span> </label>   
+											<select class="form-control" [(ngModel)]="model.year" required  #year="ngModel" name='year' id='year'>
+												<option value="" >Select Year</option>
+												<option value="{{yearList.year}}" *ngFor="let yearList of yearLists;"  >{{yearList.year}}</option>
+											</select>
+											<div *ngIf="contentForm.submitted && !year.valid" class="error-validation">Year is required</div> 											                                  
+										</div>
+								    </div>
+									<div class="col-md-6 col-sm-6">                        
+										  <div class="form-group">
+											<label class="" for="name">Registration Number<span class="required">*</span>
+											</label>                                        
+											<input type="text" id="registration_number" name="registration_number" required  [(ngModel)]="model.registration_number"  #registration_number="ngModel"  class="form-control col-md-7 col-xs-12">
+											<div *ngIf="contentForm.submitted && !registration_number.valid" class="error-validation">Registration number is required</div>                                        
+										 </div>
+								     </div>									
+									<div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label class="control-label" for="note">Note <span class="required">*</span> </label>
+                                        
+                                            <input type="text" required  [(ngModel)]="model.note"  #note="ngModel" class="form-control col-md-7 col-xs-12" name="note"
+                                                   value="" id="note">
+                                                   <div *ngIf="contentForm.submitted && !note.valid" class="error-validation">Note is required</div>
+                                        
+                                    </div>
+									</div>
+                                    <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">  
+										<div class="upload-btn-wrapper">
+										  <button class="btns">Upload a file</button>
+										  <input type="file" (change)="onSelectFile($event)" multiple />
+										</div>
+										<div class="col-md-3 col-sm-3 preview-class" *ngFor='let url of urls'>
+                                            <img [src]="url" class="profileimage" > 
+										</div>
+											
+                                        
+                                    </div>
+									</div>
+
+                                    
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <a routerLink="/vehicles" class="btn btn-primary" type="button">Back</a>
+                                            <button type="submit" class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            
+                        </div>
+                    </div>
+                </div>				 
+            </div>
+        </div>
+
+        <!-- footer content -->
+        <footer-section></footer-section>
+        <!-- /footer content -->
+
+    </div>		  
+</div>		  

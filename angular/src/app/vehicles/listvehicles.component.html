@@ -1,0 +1,173 @@
+<div class="container body">
+      <div class="main_container">
+		  <app-nav></app-nav>
+		  
+		   <div class="right_col" role="main">
+         	 <div class="">
+		  		<app-pagetitle></app-pagetitle>				 
+				 
+				   <div class="row">
+					 
+					   <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel" > 
+                                    <div class="x_title">
+										  <section class="newPanel row">
+											  <div class="row">
+												  <div class="col-sm-4 col-xs-12">
+													  <div class="col-sm-6  col-xs-12">
+														  <div class="col-md-4 col-xs-12 widthOutLabel">
+															  <label class="control-label advn-elemnt">Filter</label>
+															 	<mat-form-field>
+																	  <input matInput (keyup)="applyFilter($event.target.value)"  class="form-control col-md-7" placeholder="">
+																</mat-form-field>
+															  
+														  </div>
+													  </div>
+												  </div>
+												  <div class="col-sm-8 col-xs-12">
+													  <div class="pull-right">
+														
+														  <a routerLink="/vehicle/add" class="btn btn-info"><i class="fa fa-plus"></i> Add</a> 
+														 
+													  </div>
+												  </div>
+											  </div>
+										  </section>
+									  </div>
+                                    <div class="x_content">
+                                     <div class="example-container mat-elevation-z8">
+										
+										  <mat-table #table [dataSource]="data" matSort class="mat-elevation-z8">											
+											<!--- Note that these columns can be defined in any order. The actual rendered columns are set as a property on the row definition -->		
+											
+											 
+											<ng-container matColumnDef="serialNumber">
+											  <mat-header-cell *matHeaderCellDef md-sort-header >
+												 Serial Number
+												  <a href="javascript:void(0);">
+													
+												  </a>
+												</mat-header-cell>												
+											  <mat-cell *matCellDef="let element" [innerHTML]="element.serial_number" ></mat-cell>
+											</ng-container>
+
+											
+											<ng-container matColumnDef="manufacture">
+											  <mat-header-cell *matHeaderCellDef md-sort-header >
+												 Manufacture Name
+												  <a href="javascript:void(0);" (click)="sort('name')">
+													<i class="fa fa-sort" *ngIf="columnName !== 'name'" aria-hidden="true"></i> 
+													<i class="fa fa-sort-amount-asc" *ngIf="columnName === 'name' && sortDirection === 'asc'" ></i>
+													<i class="fa fa-sort-amount-desc" *ngIf="columnName === 'name' && sortDirection === 'desc'"></i>
+												</a>
+												</mat-header-cell>
+											  <mat-cell *matCellDef="let element" data-toggle="modal" data-target="#myModal" (click)="showDetails(element)" [innerHTML]="element.name"> </mat-cell>
+											</ng-container>
+											  
+											<!-- Weight Column -->
+											<ng-container matColumnDef="model" >
+											  <mat-header-cell *matHeaderCellDef md-sort-header >
+												 Model
+												  <a href="javascript:void(0);" (click)="sort('model')">
+													<i class="fa fa-sort" *ngIf="columnName !== 'model'" aria-hidden="true"></i>
+													<i class="fa fa-sort-amount-asc" *ngIf=" columnName === 'model' && sortDirection === 'asc'" ></i>
+													<i class="fa fa-sort-amount-desc" *ngIf="columnName === 'model' && sortDirection === 'desc'"></i>
+												 </a>
+											  </mat-header-cell>
+											  <mat-cell *matCellDef="let element" data-toggle="modal" data-target="#myModal" (click)="showDetails(element)" [innerHTML]="element.model"> </mat-cell>
+											</ng-container>
+
+											  <ng-container matColumnDef="count" >
+											  <mat-header-cell *matHeaderCellDef md-sort-header >
+												 Count
+												  
+											  </mat-header-cell>
+											  <mat-cell *matCellDef="let element" data-toggle="modal" (click)="showDetails(element)" data-target="#myModal" [innerHTML]="element.total">
+												 
+												  </mat-cell>
+											</ng-container>
+											
+											<!-- Weight Column -->
+											<ng-container matColumnDef="action">
+											  <mat-header-cell *matHeaderCellDef md-sort-header> Action </mat-header-cell>
+											  <mat-cell *matCellDef="let element"> 
+												
+												  <button
+													  class="btn btn-xs btn-info"													
+													  mwlConfirmationPopover
+													  confirmButtonType="danger"
+													  focusButton="cancel"	  
+													  [popoverTitle]="'Sold'"
+													  [popoverMessage]="'Do you want to sold (It will remove from Database)?'"
+													  placement="left"
+													  confirmText="Yes"
+													  cancelText="No"
+													  (confirm)="delete(element)"
+													  (cancel)="cancelClicked = true">
+													   Sold
+													</button>
+												</mat-cell>
+											</ng-container>
+											
+
+											<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+											<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+										  </mat-table>
+										 <mat-paginator #paginator [length]="totalCountValue"  [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" [showFirstLastButtons]="true"
+														(page)="pageEvent = $event; onPaginateChange($event)"></mat-paginator>
+										</div>
+                                    </div>
+                                </div>
+                            </div>
+					</div>				 
+			 </div>
+		  </div>
+		  <div class="modal fade" id="myModal" role="dialog" *ngIf="vechicleDetails.length>0">
+			<div class="modal-dialog modal-lg">
+
+			  <!-- Modal content-->
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">Vehicles Details</h4>
+				</div>
+				<div class="modal-body">
+				  <div class="container">
+				 
+				  <p>{{vechicleManufacture}} :: {{vechicleModel}}</p>            
+				  <table class="table table-striped">
+					<thead>
+					  <tr>
+						<th>Name</th>
+						<th>Color</th>						  
+						<th>Year</th>						  					  
+						<th>Registration Number</th>
+						<th>Note</th>  
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr *ngFor="let vechicleDetail of vechicleDetails; let i = index" >
+						<td>{{vechicleDetail.name}}</td>
+						<td>{{vechicleDetail.color}}</td>
+						<td>{{vechicleDetail.year}}</td>
+						  <td>{{vechicleDetail.registration_number}}</td>
+						  <td>{{vechicleDetail.note}}</td>
+					  </tr>
+					  
+					</tbody>
+				  </table>
+				</div>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			  </div>
+
+			</div>
+		  </div>
+		<!-- footer content -->
+       	 <footer-section></footer-section>
+        <!-- /footer content -->
+		  
+	</div>		  
+</div>		  

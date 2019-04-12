@@ -1,0 +1,46 @@
+
+<div class="login_wrapper">
+	<div class="animate form login_form">
+		
+		  <section class="login_content">
+			<alert></alert>
+			<form #loginForm="ngForm" name='form' (ngSubmit)="loginForm.form.valid && userLogin()" novalidate>
+			  <h1>Login Form</h1>
+			  <div>
+				<input type="text" class="form-control" placeholder="Username" name="username" id="username" required [(ngModel)]="model.username"  #username="ngModel"  />
+          
+				  <!--<div *ngIf="!username.valid && (username.dirty || username.touched)"  class="alert alert-danger">
+					  <div *ngIf="username.errors.required">
+						Username is required.
+					  </div>					  
+					</div>-->
+				  <div *ngIf="loginForm.submitted && !username.valid" class="alert alert-danger">Username is required</div>
+				 </div>          
+        		
+			  	<div>
+				<input type="password" class="form-control" placeholder="Password" required=""   name="password" id="password" minlength="6" required [(ngModel)]="model.password"  #password="ngModel"/>
+						<!--<div *ngIf="!password.valid && (password.dirty || password.touched)"  class="alert alert-danger">
+							 
+							  <div *ngIf="password.errors.minlength">
+								password must be at least 6 characters long.
+							  </div>
+
+						</div>-->
+					    <div *ngIf="loginForm.submitted && !password.valid" class="alert alert-danger">Password is required.</div>
+					</div> 
+			  <div>          
+        		<button type="submit" class="btn btn-success">Log in</button> 				
+			  </div>
+
+			  <div class="clearfix"></div>
+
+			  <div class="separator">  
+				<div class="clearfix"></div>
+				<br />
+
+				
+			  </div>
+			</form>
+		  </section>
+		</div>
+</div>
